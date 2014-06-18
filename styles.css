@@ -1,16 +1,24 @@
+#main
+{
+	margin: auto;
+	width: 800px;
+}
+
 #gameContainer
 {
 	margin: auto;
 	background-color: black;
-}
-
-#gameContainer:-webkit-full-screen
-{
-	width: 100%;
-	height: 100%;
+	width: 800px;
+	height: 600px;
 }
 
 body
 {
 	font-family: sans-serif;
+}
+
+.fineprint
+{
+	font-size: 8pt;
+	font-style: italic;
 }

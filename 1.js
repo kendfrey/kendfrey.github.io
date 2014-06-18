@@ -1,9 +1,10 @@
 var gameContainer;
 
-document.addEventListener("fullscreenchange", onFullscreenChange);
-document.addEventListener("mozfullscreenchange", onFullscreenChange);
-document.addEventListener("webkitfullscreenchange", onFullscreenChange);
-document.addEventListener("msfullscreenchange", onFullscreenChange);
+window.onload = function ()
+{
+	gameContainer = document.getElementById("gameContainer");
+	gameContainer.addEventListener("click", startGame);
+}
 
 document.addEventListener("pointerlockchange", onPointerLockChange);
 document.addEventListener("mozpointerlockchange", onPointerLockChange);
@@ -12,24 +13,12 @@ document.addEventListener("mspointerlockchange", onPointerLockChange);
 
 function startGame()
 {
-	gameContainer = document.createElement("div");
-	gameContainer.id = "gameContainer";
-	document.body.appendChild(gameContainer);
-	gameContainer.requestFullscreen = gameContainer.requestFullscreen || gameContainer.mozRequestFullscreen || gameContainer.mozRequestFullScreen || gameContainer.webkitRequestFullscreen || gameContainer.msRequestFullscreen;
-	gameContainer.requestFullscreen();
-}
-
-function onFullscreenChange()
-{
-	var fullscreenElement = document.fullscreenElement || document.mozFullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
-	if (fullscreenElement === gameContainer)
+	var pointerLockElement = document.pointerLockElement || document.mozPointerLockElement || document.webkitPointerLockElement || document.msPointerLockElement;
+	console.log(pointerLockElement);
+	if (pointerLockElement !== gameContainer)
 	{
 		gameContainer.requestPointerLock = gameContainer.requestPointerLock || gameContainer.mozRequestPointerLock || gameContainer.webkitRequestPointerLock || gameContainer.msRequestPointerLock;
 		gameContainer.requestPointerLock();
-	}
-	else
-	{
-		document.body.removeChild(gameContainer);
 	}
 }
 
@@ -247,6 +236,8 @@ function cleanup()
 	removeEventListener("keydown", onKeyDown);
 	removeEventListener("keyup", onKeyUp);
 	removeEventListener("mousemove", onMouseMove);
+	
+	gameContainer.removeChild(renderer.domElement);
 }
 
 function resetGame()
