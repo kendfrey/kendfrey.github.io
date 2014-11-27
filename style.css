@@ -1,0 +1,56 @@
+/*
+color scheme:
+#C79FEF (light purple)
+#C7EF9F (light green)
+#4F1F7F (dark purple)
+#4F7F1F (dark green)
+*/
+body
+{
+font-family:"Arial";
+background:#CFCFCF;
+}
+#main
+{
+background-color:#4F7F1F;
+max-width:1000px;
+margin:auto;
+border:1px solid #4F7F1F;
+box-shadow:0px 0px 10px #4F1F7F;
+}
+#main > *
+{
+background-color:#FFFFFF;
+color:#4F1F7F;
+border:1px solid #4F7F1F;
+padding:20px;
+}
+footer
+{
+font-size:8pt;
+}
+header *, footer *
+{
+margin:0px;
+}
+#main > nav
+{
+padding:1px;
+}
+nav a
+{
+display:inline-block;
+padding:5px;
+}
+nav div
+{
+clear:both;
+}
+a
+{
+color:#4F1F7F;
+}
+a:hover
+{
+color:#4F7F1F;
+}

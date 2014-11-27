@@ -1,0 +1,60 @@
+---
+layout: default
+title: REBEL - Kendall Frey's Website
+---
+<h2>REBEL</h2>
+<h3>Introduction</h3>
+<p>REBEL stands for Regular Expression Based Esoteric Language. REBEL is a declarative programming language that works by iteratively replacing substrings.</p>
+<p>A REBEL program contains three parts: An initial state, a list of regexes, and a list of replacement strings. These parts are separated by forward slashes. The initial state simply initializes the program's state to the given string. This state acts as the memory of the program. The regexes and replacements are grouped into pairs. Each regex pairs with the replacement string following it.</p>
+<p>To execute a program, the interpreter operates similar to this pseudocode:
+<pre><code>Set state = _initialState
+Loop While True
+	Loop Foreach pair In _pairs
+		Set match = state.match(pair.regex)
+		If match.success
+			state = state.replace(match, pair.replacement)
+			Continue Outer Loop
+		End
+	End
+	Exit
+End</code></pre>
+That is, each iteration of the program it finds the first matching regex and replaces the match. When none of the regexes match, the program terminates.</p>
+<p>The default file extension for REBEL programs is .re.</p>
+<h3>Hello, World!</h3>
+<p>None of this will be very clear without an example, so here is the canonical Hello World written in REBEL:
+<pre><code>Hello, World!/.+/$&gt;$0</code></pre></p>
+<p>To understand the program, you need to split it into its constituent parts. Splitting on the forward slashes, we get:
+<pre><code>Hello, World!
+.+
+$&gt;$0</code></pre></p>
+<p>The first part is the initial state. When the program starts, the state is set to <code>Hello, World!</code>.</p>
+<p>The next two lines represent a regex/replacement pair. When <code>.+</code> is encountered, it is replaced with <code>$>$0</code>. This is not a literal replacement. A $ signifies a special replacement. There are two special replacements here. The first is <code>$></code>, which outputs the rest of the replacement string to stdout, and evaluates to an empty string in the replacement result. The second is <code>$0</code>, which evaluates to the text matched by the regular expression. Together, they cause the entire match to be printed on stdout and replaced with an empty string.</p>
+<p>Here is what goes on internally during the execution of the program:
+<ul>
+<li>The state is set to <code>Hello, World!</code>.</li>
+<li><code>.+</code> matches <code>Hello, World!</code>.</li>
+<li><code>$&gt;$0</code> is evaluated. It prints <code>Hello, World!</code> and evaluates to the empty string.</li>
+<li><code>Hello, World</code> is replaced with the empty string. The state is now the empty string.</li>
+<li>None of the regexes match the empty string. The program terminates.</li>
+</ul></p>
+<p>Here are some variations of the Hello World program:
+<pre><code>a/a/$&gt;Hello, World!</code></pre>
+<pre><code>/^$/a$&gt;Hello, World!</code></pre></p>
+<h3>Details</h3>
+<h4>Syntax</h4>
+<p>A REBEL program consists of a number of strings separated by unescaped forward slashes. A valid program must have an odd number of such strings. The first string in the program is the initial state. All strings after that are grouped into regex/replacement pairs. Each pair's first item is a regex, and its second is a replacement string.</p>
+<p>Forward slashes can be included in these substrings by escaping them with a preceding backslash. Backslashes can be escaped with another backslash. In the initial state and replacement strings, escaping backslashes are removed, but in regex strings they are not.</p>
+<h4>Regex</h4>
+<p>REBEL uses .NET-compatible regex, which is described <a href="http://msdn.microsoft.com/en-us/library/az24scfc.aspx">here</a>.</p>
+<h4>Replacement</h4>
+<p>REBEL uses a superset of the .NET substitution strings, which is described <a href="http://msdn.microsoft.com/en-us/library/ewy2t5e0.aspx">here</a>.</p>
+<p>There are two additional replacement patterns, used for I/O. First is <code>$&lt;</code>, which reads a line of input from stdin and evaluates to the result. Second is <code>$&gt;</code>, which prints the rest of the replacement string to stdout and evaluates to an empty string.</p>
+<h4>Execution</h4>
+<p>A program begins by setting the state to the provided string. It then repeatedly finds and replaces regex matches.</p>
+<p>The first regex that matches any part of the string at each step is then replaced by the corresponding replacement string. When none of the regexes match, the program terminates.</p>
+<h3>Tools</h3>
+<p>The official package has a command line interpreter and the Visual REBEL IDE and debugger. Requires the .NET Framework 4.5. Download: <a href="/rebel.zip">rebel.zip</a></p>
+<h3>Sample Programs</h3>
+<p>Cat: <a href="/cat.re">cat.re</a></p>
+<p>99 bottles of beer: <a href="/99bottles.re">99bottles.re</a></p>
+<p>Quine: <a href="/quine.re">quine.re</a></p>
