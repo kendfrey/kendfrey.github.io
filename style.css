@@ -1,56 +1,57 @@
-/*
-color scheme:
-#C79FEF (light purple)
-#C7EF9F (light green)
-#4F1F7F (dark purple)
-#4F7F1F (dark green)
-*/
+html
+{
+	height: 100%;
+}
+
 body
 {
-font-family:"Arial";
-background:#CFCFCF;
+	font-family:"Roboto";
+	color: #FFFFFF;
+	background: #0F0F0F;
+	font-weight: 100;
+	height: 100%;
+	margin: 0;
+	text-align: center;
 }
-#main
+
+body::before
 {
-background-color:#4F7F1F;
-max-width:1000px;
-margin:auto;
-border:1px solid #4F7F1F;
-box-shadow:0px 0px 10px #4F1F7F;
+	content: "";
+	display: inline-block;
+	width: 0px;
+	height: 100%;
+	vertical-align: middle;
 }
-#main > *
+
+body > div
 {
-background-color:#FFFFFF;
-color:#4F1F7F;
-border:1px solid #4F7F1F;
-padding:20px;
+	display: inline-block;
 }
-footer
+
+#name
 {
-font-size:8pt;
+	font-size: 96pt;
+	margin-bottom: 0.25em;
 }
-header *, footer *
+
+#links
 {
-margin:0px;
+	display: flex;
+	justify-content: space-around;
 }
-#main > nav
-{
-padding:1px;
-}
-nav a
-{
-display:inline-block;
-padding:5px;
-}
-nav div
-{
-clear:both;
-}
+
 a
 {
-color:#4F1F7F;
+	outline-color: #FFFFFF;
+	transition: 0.25s;
 }
-a:hover
+
+a:not(:hover)
 {
-color:#4F7F1F;
+	opacity: 0.75;
+}
+
+img
+{
+	vertical-align: bottom;
 }
